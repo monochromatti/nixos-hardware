@@ -23,7 +23,7 @@
     };
 
   config = {
-    boot.initrd.kernelModules = [ config.hardware.intelgpu.driver ];
+    boot.initrd.kernelModules = lib.mkIf config.hardware.intelgpu.loadInInitrd [ config.hardware.intelgpu.driver ];
 
     environment.variables = {
       VDPAU_DRIVER = lib.mkIf config.hardware.graphics.enable (lib.mkDefault "va_gl");
